@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" data-lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Arye Kupersmidt — Human-Centered Clarity</title>
+  <meta name="description" content="Arye Kupersmidt — Product Designer. Designing clarity in a noisy world through strategy, emotion and technology." />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="nav">
+    <a class="nav__logo" href="index.html" aria-label="Arye Kupersmidt – Home">
+      <img src="assets/logo-name.svg" alt="Arye Kupersmidt" class="nav__logo-img" />
+    </a>
+    <div class="nav__actions">
+      <a href="#work" class="nav__link" data-en="Work" data-he="עבודות">Work</a>
+      <a href="#about" class="nav__link" data-en="About" data-he="אודות">About</a>
+      <a href="cv.html" class="nav__link" data-en="CV" data-he="קורות חיים">CV</a>
+      <button class="lang-toggle" id="langToggle" aria-label="Switch language">
+        <span class="lang-toggle__en">EN</span>
+        <span class="lang-toggle__sep">/</span>
+        <span class="lang-toggle__he">עב</span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+
+    <!-- ① Blurred layer (always visible) -->
+    <div class="hero__layer hero__layer--blur" aria-hidden="true">
+      <div class="hero__inner">
+        <div class="hero__tag-wrap">
+          <span class="hero__tag">
+            <img src="assets/Profile.png" alt="" class="hero__tag-avatar" />
+            <span>Human-Centered Clarity</span>
+          </span>
+        </div>
+        <h1 class="hero__title">
+          <span class="hero__line hero__line--1">
+            <svg class="hero__asterisk" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <line x1="50" y1="8" x2="50" y2="92" stroke="currentColor" stroke-width="6" stroke-linecap="round"/>
+              <line x1="50" y1="8" x2="50" y2="92" stroke="currentColor" stroke-width="6" stroke-linecap="round" transform="rotate(30 50 50)"/>
+              <line x1="50" y1="8" x2="50" y2="92" stroke="currentColor" stroke-width="6" stroke-linecap="round" transform="rotate(60 50 50)"/>
+              <line x1="50" y1="8" x2="50" y2="92" stroke="currentColor" stroke-width="6" stroke-linecap="round" transform="rotate(90 50 50)"/>
+              <line x1="50" y1="8" x2="50" y2="92" stroke="currentColor" stroke-width="6" stroke-linecap="round" transform="rotate(120 50 50)"/>
+              <line x1="50" y1="8" x2="50" y2="92" stroke="currentColor" stroke-width="6" stroke-linecap="round" transform="rotate(150 50 50)"/>
+            </svg><span class="hero__bold">Clarity is a</span>
+          </span>
+          <span class="hero__line hero__line--2">
+            <em class="hero__thin">design decision</em><svg class="hero__star" viewBox="0 0 156.02 156.06" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M77.53,44.52L109.77,0l1.18.85c-2.5,17.94-6.39,35.78-9.43,53.67l54.5-9.5-.73,2.51-43.76,30.23,42.96,30.03c.7.51,2.18,2.26,1.05,2.99l-54.01-9.26,9.54,52.75c-.87,4.14-3.24,0-4.45-1.6-8.83-11.67-16.61-24.86-25.18-36.82-.64-.89-2.83-4.36-3.65-4.35l-29.54,42.98c-.76,1.01-1.93,1.65-3.22,1.53l9.5-54.49L1.7,110.99c-1.81.17-2.24-1.35-.96-2.5,14.56-10.01,28.88-20.45,43.78-29.98l-.52-1.21L.58,47.21l-.57-1.94,54.5,8.74L45.5.25l1.8.24c10.12,14.62,20.61,29.05,30.23,44.03Z" fill="currentColor"/>
+            </svg>
+          </span>
+        </h1>
+        <div class="hero__bottom">
+          <p class="hero__sub">Hi, I'm Arye Kupersmidt and I'm a product designer. I design clarity through strategy, emotion and technology.</p>
+          <a href="#work" class="hero__arrow" aria-label="Scroll to work">
+            <svg viewBox="0 0 44 60" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <line x1="22" y1="2" x2="22" y2="50" stroke="currentColor" stroke-width="5.5" stroke-linecap="round"/>
+              <polyline points="5,36 22,53 39,36" stroke="currentColor" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- ② Sharp layer (clipped to cursor spotlight) -->
+    <div class="hero__layer hero__layer--sharp">
+      <!-- Gloss bubble — 3D reflection effect -->
+      <div class="hero__spotlight-gloss" aria-hidden="true"></div>
+      <div class="hero__inner">
+        <div class="hero__tag-wrap">
+          <span class="hero__tag">
+            <img src="assets/Profile.png" alt="Arye Kupersmidt" class="hero__tag-avatar" />
+            <span data-en="Human-Centered Clarity" data-he="בהירות אנושית">Human-Centered Clarity</span>
+          </span>
+        </div>
+        <h1 class="hero__title">
+          <span class="hero__line hero__line--1">
+            <svg class="hero__asterisk" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <line x1="50" y1="8" x2="50" y2="92" stroke="currentColor" stroke-width="6" stroke-linecap="round"/>
+              <line x1="50" y1="8" x2="50" y2="92" stroke="currentColor" stroke-width="6" stroke-linecap="round" transform="rotate(30 50 50)"/>
+              <line x1="50" y1="8" x2="50" y2="92" stroke="currentColor" stroke-width="6" stroke-linecap="round" transform="rotate(60 50 50)"/>
+              <line x1="50" y1="8" x2="50" y2="92" stroke="currentColor" stroke-width="6" stroke-linecap="round" transform="rotate(90 50 50)"/>
+              <line x1="50" y1="8" x2="50" y2="92" stroke="currentColor" stroke-width="6" stroke-linecap="round" transform="rotate(120 50 50)"/>
+              <line x1="50" y1="8" x2="50" y2="92" stroke="currentColor" stroke-width="6" stroke-linecap="round" transform="rotate(150 50 50)"/>
+            </svg><span class="hero__bold" data-en="Clarity is a" data-he="בהירות היא">Clarity is a</span>
+          </span>
+          <span class="hero__line hero__line--2">
+            <em class="hero__thin" data-en="design decision" data-he="החלטת עיצוב">design decision</em><svg class="hero__star" viewBox="0 0 156.02 156.06" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M77.53,44.52L109.77,0l1.18.85c-2.5,17.94-6.39,35.78-9.43,53.67l54.5-9.5-.73,2.51-43.76,30.23,42.96,30.03c.7.51,2.18,2.26,1.05,2.99l-54.01-9.26,9.54,52.75c-.87,4.14-3.24,0-4.45-1.6-8.83-11.67-16.61-24.86-25.18-36.82-.64-.89-2.83-4.36-3.65-4.35l-29.54,42.98c-.76,1.01-1.93,1.65-3.22,1.53l9.5-54.49L1.7,110.99c-1.81.17-2.24-1.35-.96-2.5,14.56-10.01,28.88-20.45,43.78-29.98l-.52-1.21L.58,47.21l-.57-1.94,54.5,8.74L45.5.25l1.8.24c10.12,14.62,20.61,29.05,30.23,44.03Z" fill="currentColor"/>
+            </svg>
+          </span>
+        </h1>
+        <div class="hero__bottom">
+          <p class="hero__sub"
+             data-en="Hi, I'm Arye Kupersmidt and I'm a product designer. I design clarity through strategy, emotion and technology."
+             data-he="שלום, קוראים לי אריה קופרשמידט ואני מעצב מוצר. אני מעצב בהירות דרך אסטרטגיה, רגש וטכנולוגיה.">
+            Hi, I'm Arye Kupersmidt and I'm a product designer. I design clarity through strategy, emotion and technology.
+          </p>
+          <a href="#work" class="hero__arrow" aria-label="Scroll to work">
+            <svg viewBox="0 0 44 60" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <line x1="22" y1="2" x2="22" y2="50" stroke="currentColor" stroke-width="5.5" stroke-linecap="round"/>
+              <polyline points="5,36 22,53 39,36" stroke="currentColor" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- FRAMEWORK -->
+  <section class="framework reveal" id="framework">
+    <div class="framework__inner">
+      <p class="framework__label reveal" data-en="The approach" data-he="הגישה">The approach</p>
+      <h2 class="framework__title reveal" data-en="Clarity emerges when three things meet." data-he="בהירות נוצרת כששלושה דברים נפגשים.">Clarity emerges when three things meet.</h2>
+      <div class="framework__pillars reveal-stagger">
+
+        <!-- Strategy -->
+        <div class="framework__pillar reveal">
+          <span class="framework__num">01</span>
+          <h3 class="framework__pillar-name" data-en="Strategy" data-he="אסטרטגיה">Strategy</h3>
+          <p class="framework__pillar-desc" data-en="What truly matters" data-he="מה חשוב באמת">What truly matters</p>
+          <div class="pillar-tags" aria-hidden="true">
+            <span class="pillar-tag" data-en="Exit Strategy" data-he="אסטרטגיית איקזיט">Exit Strategy</span>
+            <span class="pillar-tag" data-en="Audience Growth" data-he="הגדלת קהלים">Audience Growth</span>
+            <span class="pillar-tag" data-en="Business Goals" data-he="יעדים עסקיים">Business Goals</span>
+            <span class="pillar-tag" data-en="KPIs" data-he="מדדי הצלחה">KPIs</span>
+          </div>
+        </div>
+
+        <div class="framework__plus reveal" aria-hidden="true">+</div>
+
+        <!-- Emotion -->
+        <div class="framework__pillar reveal">
+          <span class="framework__num">02</span>
+          <h3 class="framework__pillar-name" data-en="Emotion" data-he="רגש">Emotion</h3>
+          <p class="framework__pillar-desc" data-en="Who it matters to and why" data-he="למי זה חשוב ולמה">Who it matters to and why</p>
+          <div class="pillar-tags" aria-hidden="true">
+            <span class="pillar-tag" data-en="User Types" data-he="סוגי משתמשים">User Types</span>
+            <span class="pillar-tag" data-en="Personas" data-he="פרסונות">Personas</span>
+            <span class="pillar-tag" data-en="User Scenarios" data-he="תסריטי משתמש">User Scenarios</span>
+            <span class="pillar-tag" data-en="Pain Points" data-he="נקודות כאב">Pain Points</span>
+          </div>
+        </div>
+
+        <div class="framework__plus reveal" aria-hidden="true">+</div>
+
+        <!-- System -->
+        <div class="framework__pillar reveal">
+          <span class="framework__num">03</span>
+          <h3 class="framework__pillar-name" data-en="System" data-he="מערכת">System</h3>
+          <p class="framework__pillar-desc" data-en="How it works in practice" data-he="איך זה עובד בפועל">How it works in practice</p>
+          <div class="pillar-tags" aria-hidden="true">
+            <span class="pillar-tag" data-en="Website" data-he="אתר אינטרנט">Website</span>
+            <span class="pillar-tag" data-en="App" data-he="אפליקציה">App</span>
+            <span class="pillar-tag" data-en="Design System" data-he="מערכת עיצוב">Design System</span>
+            <span class="pillar-tag" data-en="Cloud" data-he="ענן">Cloud</span>
+          </div>
+        </div>
+
+      </div>
+      <p class="framework__equation reveal">
+        <span class="framework__eq-item" data-en="When all three align — clarity emerges." data-he="כאשר שלושתם מיושרים — נוצרת בהירות.">When all three align — clarity emerges.</span>
+        <span class="framework__eq-item framework__eq-item--dim" data-en="When one is missing — noise takes over." data-he="כאשר אחד חסר — נוצר רעש.">When one is missing — noise takes over.</span>
+      </p>
+    </div>
+  </section>
+
+  <!-- WORK -->
+  <section class="work reveal" id="work">
+    <div class="work__header reveal">
+      <p class="work__label" data-en="Selected work" data-he="עבודות נבחרות">Selected work</p>
+    </div>
+
+    <div class="work__grid reveal-stagger">
+
+      <!-- N12 -->
+      <article class="project-card reveal" data-index="01">
+        <a href="case-studies/n12.html" class="project-card__link">
+          <div class="project-card__visual project-card__visual--n12">
+            <img src="assets/n12.jpg" alt="N12 news site mockup" class="project-card__img" />
+          </div>
+          <div class="project-card__body">
+            <!-- N12 Logo -->
+            <div class="project-card__logo" aria-label="N12">
+              <img src="assets/logo-n12.svg" alt="N12 logo" class="project-card__logo-img" />
+            </div>
+            <h2 class="project-card__title" data-en="News Site" data-he="אתר חדשות">News Site</h2>
+            <p class="project-card__insight" data-en="Clarity within information overload." data-he="בהירות בתוך עומס מידע.">Clarity within information overload.</p>
+            <span class="project-card__cta" data-en="See case study →" data-he="לפרויקט →">See case study →</span>
+          </div>
+        </a>
+      </article>
+
+      <!-- 12+ -->
+      <article class="project-card reveal" data-index="02">
+        <a href="case-studies/12plus.html" class="project-card__link">
+          <div class="project-card__visual project-card__visual--12plus">
+            <img src="assets/12+.jpg" alt="12+ VOD app mockup" class="project-card__img" />
+          </div>
+          <div class="project-card__body">
+            <!-- 12+ Logo -->
+            <div class="project-card__logo" aria-label="12+">
+              <img src="assets/logo_12-plus.svg" alt="12+ logo" class="project-card__logo-img" />
+            </div>
+            <h2 class="project-card__title" data-en="VOD App" data-he="אפליקציית VOD">VOD App</h2>
+            <p class="project-card__insight" data-en="Balancing content, ads and user experience." data-he="איזון בין תוכן, פרסום וחוויית משתמש.">Balancing content, ads and user experience.</p>
+            <span class="project-card__cta" data-en="See case study →" data-he="לפרויקט →">See case study →</span>
+          </div>
+        </a>
+      </article>
+
+      <!-- Longly -->
+      <article class="project-card reveal" data-index="03">
+        <a href="case-studies/longly.html" class="project-card__link">
+          <div class="project-card__visual project-card__visual--longly">
+            <img src="assets/Longly.jpg" alt="Longly app mockup" class="project-card__img" />
+          </div>
+          <div class="project-card__body">
+            <!-- Longly Logo -->
+            <div class="project-card__logo" aria-label="Longly">
+              <img src="assets/logo-Longly.svg" alt="Longly logo" class="project-card__logo-img" />
+            </div>
+            <h2 class="project-card__title" data-en="Long-Term Goals" data-he="יעדים ארוכי טווח">Long-Term Goals</h2>
+            <p class="project-card__insight" data-en="Connecting today to tomorrow." data-he="חיבור בין היום למחר.">Connecting today to tomorrow.</p>
+            <span class="project-card__cta" data-en="See case study →" data-he="לפרויקט →">See case study →</span>
+          </div>
+        </a>
+      </article>
+
+      <!-- Brain12 -->
+      <article class="project-card reveal" data-index="04">
+        <a href="case-studies/brain12.html" class="project-card__link">
+          <div class="project-card__visual project-card__visual--brain12">
+            <img src="assets/brein.jpg" alt="Brain12 game app mockup" class="project-card__img" />
+          </div>
+          <div class="project-card__body">
+            <!-- Brain12 Logo -->
+            <div class="project-card__logo" aria-label="Brain12">
+              <img src="assets/logo-brain12.svg" alt="Brain12 logo" class="project-card__logo-img" />
+            </div>
+            <h2 class="project-card__title" data-en="Mind Games" data-he="משחקי חשיבה">Mind Games</h2>
+            <p class="project-card__insight" data-en="Mental clarity through play." data-he="בהירות מחשבתית דרך משחק.">Mental clarity through play.</p>
+            <span class="project-card__cta" data-en="See case study →" data-he="לפרויקט →">See case study →</span>
+          </div>
+        </a>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="about reveal" id="about">
+    <div class="about__inner">
+      <div class="about__text reveal">
+        <p class="about__label" data-en="About" data-he="אודות">About</p>
+        <h2 class="about__title" data-en="Design is not just how something looks." data-he="עיצוב הוא לא רק איך משהו נראה.">Design is not just how something looks.</h2>
+        <p class="about__body"
+           data-en="It's how it feels, why it exists, and how it connects people to an idea. I work at the intersection of strategy, emotion, technology and experience — creating designs that allow people to understand, connect and focus on what truly matters."
+           data-he="אלא איך הוא מרגיש, למה הוא קיים, ואיך הוא מחבר בין אנשים לרעיון. אני עובד בצומת של אסטרטגיה, רגש, טכנולוגיה וחוויות — ומייצר עיצובים שמאפשרים לאנשים להבין, להתחבר ולהתמקד בעיקר.">
+          It's how it feels, why it exists, and how it connects people to an idea. I work at the intersection of strategy, emotion, technology and experience — creating designs that allow people to understand, connect and focus on what truly matters.
+        </p>
+        <p class="about__mission"
+           data-en="My goal: to build systems and experiences where people become more precise versions of themselves."
+           data-he="המטרה שלי: לבנות מערכות וחוויות שבהן אנשים נהיים מדויקים יותר לעצמם.">
+          My goal: to build systems and experiences where people become more precise versions of themselves.
+        </p>
+        <div class="about__links">
+          <a href="https://linkedin.com" target="_blank" rel="noopener" class="about__social">LinkedIn</a>
+          <a href="https://instagram.com" target="_blank" rel="noopener" class="about__social">Instagram</a>
+          <a href="cv.html" class="about__social" data-en="Download CV" data-he="הורד קורות חיים">Download CV</a>
+        </div>
+      </div>
+      <div class="about__quote reveal">
+        <blockquote class="about__blockquote">
+          <div class="about__blockquote-header">
+            <img src="assets/Profile.png" alt="Arye Kupersmidt" class="about__blockquote-avatar" />
+            <span class="about__blockquote-name">Arye Kupersmidt</span>
+          </div>
+          <p data-en="True design is not about creating more — it's about creating quiet within complexity." data-he="עיצוב אמיתי אינו יצירת עוד — אלא יצירת שקט בתוך מורכבות.">True design is not about creating more — it's about creating quiet within complexity.</p>
+          <footer data-en="Clarity is a design decision." data-he="בהירות היא החלטה עיצובית.">Clarity is a design decision.</footer>
+        </blockquote>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer__inner">
+      <p class="footer__copy">© 2025 Arye Kupersmidt</p>
+      <div class="footer__links">
+        <a href="https://linkedin.com" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://instagram.com" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://facebook.com" target="_blank" rel="noopener">Facebook</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

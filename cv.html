@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" data-lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CV — Arye Kupersmidt</title>
+  <link rel="stylesheet" href="css/styles.css" />
+  <style>
+    /* ── CV page layout ─────────────────────────────────── */
+    .cv-wrap {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: calc(var(--nav-h) + 4rem) var(--pad-x) 8rem;
+    }
+
+    /* header */
+    .cv-header {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: start;
+      gap: 2rem;
+      margin-bottom: 4rem;
+      padding-bottom: 3rem;
+      border-bottom: 1px solid var(--border);
+    }
+    @media (max-width: 600px) { .cv-header { grid-template-columns: 1fr; } }
+
+    .cv-header__name {
+      font-family: var(--f-heading);
+      font-size: clamp(2.25rem, 6vw, 4rem);
+      font-weight: 700;
+      line-height: 1;
+      letter-spacing: -.02em;
+      margin-bottom: .5rem;
+    }
+    .cv-header__title {
+      font-family: var(--f-heading);
+      font-size: clamp(1rem, 2vw, 1.25rem);
+      font-weight: 300;
+      color: var(--text-dim);
+      font-style: italic;
+      margin-bottom: 1.75rem;
+    }
+    .cv-header__contacts {
+      display: flex;
+      flex-direction: column;
+      gap: .45rem;
+    }
+    .cv-contact-row {
+      display: flex;
+      align-items: center;
+      gap: .6rem;
+      font-size: .875rem;
+      color: var(--text-dim);
+    }
+    .cv-contact-row svg { flex-shrink: 0; opacity: .5; }
+    .cv-contact-row a {
+      color: inherit;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      text-decoration-color: transparent;
+      transition: text-decoration-color .2s, color .2s;
+    }
+    .cv-contact-row a:hover { color: var(--text); text-decoration-color: var(--text); }
+
+    /* section */
+    .cv-section { margin-bottom: 3.5rem; }
+    .cv-section__label {
+      font-family: var(--f-heading);
+      font-size: .6875rem;
+      font-weight: 600;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 1.75rem;
+      padding-bottom: .75rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    /* experience item */
+    .cv-item { margin-bottom: 2.5rem; }
+    .cv-item__header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: .25rem;
+    }
+    .cv-item__period {
+      font-size: .8125rem;
+      color: var(--text-muted);
+      flex-shrink: 0;
+      font-variant-numeric: tabular-nums;
+    }
+    .cv-item__role {
+      font-family: var(--f-heading);
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: .15rem;
+    }
+    .cv-item__org {
+      font-size: .9375rem;
+      color: var(--text-dim);
+      margin-bottom: .75rem;
+    }
+    .cv-item__desc {
+      font-size: .9375rem;
+      color: var(--text-dim);
+      line-height: 1.7;
+      margin-bottom: .75rem;
+      max-width: 68ch;
+    }
+    .cv-item__bullets {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: .4rem;
+      max-width: 68ch;
+    }
+    .cv-item__bullets li {
+      font-size: .9375rem;
+      color: var(--text-dim);
+      line-height: 1.65;
+      padding-left: 1.1rem;
+      position: relative;
+    }
+    .cv-item__bullets li::before {
+      content: '·';
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-size: 1.1rem;
+      line-height: 1.5;
+    }
+
+    /* skills */
+    .cv-skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1rem;
+    }
+    .cv-skill-card {
+      padding: 1.25rem 1.5rem;
+      border: 1px solid var(--border);
+      border-radius: 1rem;
+      font-size: .9rem;
+      color: var(--text-dim);
+      line-height: 1.55;
+      transition: border-color .2s, background .2s;
+    }
+    .cv-skill-card:hover {
+      border-color: rgba(26,26,24,.2);
+      background: rgba(26,26,24,.02);
+    }
+
+    /* education */
+    .cv-item__degree {
+      font-family: var(--f-heading);
+      font-size: .9375rem;
+      font-weight: 600;
+      margin-bottom: .15rem;
+    }
+    .cv-item__school { font-size: .9375rem; color: var(--text-dim); }
+    .cv-item__note { font-size: .875rem; color: var(--accent); margin-top: .3rem; }
+
+    /* RTL */
+    [dir="rtl"] .cv-item__bullets li { padding-left: 0; padding-right: 1.1rem; }
+    [dir="rtl"] .cv-item__bullets li::before { left: auto; right: 0; }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="nav">
+    <a class="nav__logo" href="index.html" aria-label="Arye Kupersmidt – Home">
+      <img src="assets/logo-name.svg" alt="Arye Kupersmidt" class="nav__logo-img" />
+    </a>
+    <div class="nav__actions">
+      <a href="index.html#work" class="nav__link" data-en="Work" data-he="עבודות">Work</a>
+      <a href="index.html#about" class="nav__link" data-en="About" data-he="אודות">About</a>
+      <button class="lang-toggle" id="langToggle" aria-label="Switch language">
+        <span class="lang-toggle__en">EN</span>
+        <span class="lang-toggle__sep">/</span>
+        <span class="lang-toggle__he">עב</span>
+      </button>
+    </div>
+  </nav>
+
+  <div class="cv-wrap">
+
+    <!-- HEADER -->
+    <div class="cv-header reveal">
+      <div>
+        <h1 class="cv-header__name">Arye<br>Kupershmit</h1>
+        <p class="cv-header__title"
+           data-en="Product Designer — Human-Centered Clarity"
+           data-he="מעצב מוצר — בהירות אנושית">
+          Product Designer — Human-Centered Clarity
+        </p>
+        <div class="cv-header__contacts">
+          <div class="cv-contact-row">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+              <rect x="1" y="3" width="14" height="10" rx="1.5" stroke="currentColor" stroke-width="1.4"/>
+              <path d="M1.5 4L8 9.5 14.5 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+            </svg>
+            <a href="mailto:Aryekup@gmail.com">Aryekup@gmail.com</a>
+          </div>
+          <div class="cv-contact-row">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+              <path d="M3 1.5h2.5l1 3-1.5 1a9 9 0 004.5 4.5l1-1.5 3 1V12a1.5 1.5 0 01-1.5 1.5C5.5 13.5 2.5 7.5 2.5 3A1.5 1.5 0 014 1.5H3z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/>
+            </svg>
+            <span>+972-506919223</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- WORK EXPERIENCE -->
+    <div class="cv-section reveal">
+      <p class="cv-section__label" data-en="Work Experience" data-he="ניסיון תעסוקתי">Work Experience</p>
+
+      <div class="cv-item">
+        <div class="cv-item__header">
+          <div>
+            <p class="cv-item__role" data-en="Product Designer" data-he="מעצב מוצר">Product Designer</p>
+            <p class="cv-item__org"
+               data-en="Keshet 12 — N12, 12+, Brain12, Mako, Tech12"
+               data-he="קשת 12 — N12, 12+, Brain12, מאקו, Tech12">
+              Keshet 12 — N12, 12+, Brain12, Mako, Tech12
+            </p>
+          </div>
+          <span class="cv-item__period">2019 – 2026</span>
+        </div>
+        <p class="cv-item__desc"
+           data-en="Responsible for designing the user experience of wide-ranging digital products — including news websites, VOD and streaming apps, games, and complex systems — from initial setup through day-to-day operation, feature enhancements, and ongoing product evolution."
+           data-he="אחראי לעיצוב חוויית המשתמש של מוצרים דיגיטליים רחבי היקף — כולל אתרי חדשות, אפליקציות VOD וסטרימינג, משחקים ומערכות מורכבות — מהקמה ראשונית דרך תפעול שוטף, שיפורי פיצ'רים ואבולוציה מתמשכת של המוצר.">
+          Responsible for designing the user experience of wide-ranging digital products — including news websites, VOD and streaming apps, games, and complex systems — from initial setup through day-to-day operation, feature enhancements, and ongoing product evolution.
+        </p>
+        <ul class="cv-item__bullets">
+          <li data-en="Conducting research, reviewing references, and analyzing competitors."
+              data-he="ביצוע מחקר, סקירת רפרנסים וניתוח מתחרים.">
+            Conducting research, reviewing references, and analyzing competitors.
+          </li>
+          <li data-en="Planning UX flows and creating wireframes aligned with product goals and user experience strategy."
+              data-he="תכנון זרימות UX ויצירת wireframes בהתאם למטרות המוצר ואסטרטגיית חוויית המשתמש.">
+            Planning UX flows and creating wireframes aligned with product goals and user experience strategy.
+          </li>
+          <li data-en="Designing precise and intuitive user interfaces adapted to a variety of platforms."
+              data-he="עיצוב ממשקי משתמש מדויקים ואינטואיטיביים המותאמים לפלטפורמות מגוונות.">
+            Designing precise and intuitive user interfaces adapted to a variety of platforms.
+          </li>
+          <li data-en="Establishing and maintaining a comprehensive Design System throughout the product lifecycle."
+              data-he="הקמה ותחזוקה של מערכת עיצוב מקיפה לאורך מחזור החיים של המוצר.">
+            Establishing and maintaining a comprehensive Design System throughout the product lifecycle.
+          </li>
+          <li data-en="Performing usability testing and A/B experiments to continuously improve user experience."
+              data-he="ביצוע בדיקות שימושיות וניסויי A/B לשיפור מתמיד של חוויית המשתמש.">
+            Performing usability testing and A/B experiments to continuously improve user experience.
+          </li>
+          <li data-en="Collaborating closely with developers, product managers, content creators, and data analysts."
+              data-he="שיתוף פעולה הדוק עם מפתחים, מנהלי מוצר, יוצרי תוכן ואנליסטים.">
+            Collaborating closely with developers, product managers, content creators, and data analysts.
+          </li>
+          <li data-en="Balancing user needs with business goals and technical constraints."
+              data-he="איזון בין צרכי המשתמש, מטרות עסקיות ואילוצים טכניים.">
+            Balancing user needs with business goals and technical constraints.
+          </li>
+        </ul>
+      </div>
+
+      <div class="cv-item">
+        <div class="cv-item__header">
+          <div>
+            <p class="cv-item__role" data-en="Graphic Designer" data-he="מעצב גרפי">Graphic Designer</p>
+            <p class="cv-item__org">Fassi Kraus</p>
+          </div>
+          <span class="cv-item__period">2018 – 2019</span>
+        </div>
+        <p class="cv-item__desc"
+           data-en="Worked on various projects including designs for marketing, brand identities and Web (UI/UX)."
+           data-he="עבדתי על פרויקטים מגוונים שכללו עיצובים לשיווק, זהויות מותג ואינטרנט (UI/UX).">
+          Worked on various projects including designs for marketing, brand identities and Web (UI/UX).
+        </p>
+      </div>
+
+      <div class="cv-item">
+        <div class="cv-item__header">
+          <div>
+            <p class="cv-item__role" data-en="Freelance Graphic Designer" data-he="מעצב גרפי עצמאי">Freelance Graphic Designer</p>
+          </div>
+          <span class="cv-item__period">2015 – 2019</span>
+        </div>
+        <p class="cv-item__desc"
+           data-en="Designed logos and brand materials both for print and digital platforms."
+           data-he="עיצבתי לוגואים וחומרי מותג הן להדפסה והן לפלטפורמות דיגיטליות.">
+          Designed logos and brand materials both for print and digital platforms.
+        </p>
+      </div>
+    </div>
+
+    <!-- SKILLS & TOOLS -->
+    <div class="cv-section reveal">
+      <p class="cv-section__label" data-en="Skills &amp; Tools" data-he="כישורים וכלים">Skills &amp; Tools</p>
+      <div class="cv-skills-grid">
+        <div class="cv-skill-card"
+             data-en="Data-driven design: Research and analytics supported by AI-assisted insight synthesis to inform product and UX decisions"
+             data-he="עיצוב מונחה נתונים: מחקר ואנליטיקה הנתמכים בסינתזת תובנות בעזרת AI לצורך קבלת החלטות מוצר ו-UX">
+          Data-driven design: Research and analytics supported by AI-assisted insight synthesis to inform product and UX decisions
+        </div>
+        <div class="cv-skill-card"
+             data-en="Interactive prototyping and UI animation using Figma, Claude, and Cursor for advanced interaction logic and production-ready prototypes"
+             data-he="פרוטוטייפינג אינטראקטיבי ואנימציית UI באמצעות Figma, Claude ו-Cursor ללוגיקת אינטראקציה מתקדמת ופרוטוטייפים מוכנים לייצור">
+          Interactive prototyping and UI animation using Figma, Claude, and Cursor for advanced interaction logic and production-ready prototypes
+        </div>
+        <div class="cv-skill-card"
+             data-en="Design Systems: Development, management, and AI-supported refinement"
+             data-he="מערכות עיצוב: פיתוח, ניהול ועידון בתמיכת AI">
+          Design Systems: Development, management, and AI-supported refinement
+        </div>
+        <div class="cv-skill-card"
+             data-en="Full command of Adobe Creative Suite: Illustrator, Photoshop, After Effects"
+             data-he="שליטה מלאה ב-Adobe Creative Suite: Illustrator, Photoshop, After Effects">
+          Full command of Adobe Creative Suite: Illustrator, Photoshop, After Effects
+        </div>
+        <div class="cv-skill-card"
+             data-en="Strong foundation in UX principles and user-centered design"
+             data-he="בסיס חזק בעקרונות UX ועיצוב ממוקד משתמש">
+          Strong foundation in UX principles and user-centered design
+        </div>
+        <div class="cv-skill-card"
+             data-en="Art direction, illustration, and macro motion design capabilities"
+             data-he="יכולות ארט דירקשן, איור ועיצוב תנועה מורכב">
+          Art direction, illustration, and macro motion design capabilities
+        </div>
+        <div class="cv-skill-card"
+             data-en="Practical experience applying Design Thinking methodologies"
+             data-he="ניסיון מעשי ביישום מתודולוגיות Design Thinking">
+          Practical experience applying Design Thinking methodologies
+        </div>
+        <div class="cv-skill-card"
+             data-en="Building user flows and design iterations based on data insights"
+             data-he="בניית זרימות משתמש ואיטרציות עיצוב על בסיס תובנות נתונים">
+          Building user flows and design iterations based on data insights
+        </div>
+      </div>
+    </div>
+
+    <!-- EDUCATION -->
+    <div class="cv-section reveal">
+      <p class="cv-section__label" data-en="Education" data-he="השכלה">Education</p>
+      <div class="cv-item">
+        <div class="cv-item__header">
+          <div>
+            <p class="cv-item__degree"
+               data-en="B.Des — Visual Communication"
+               data-he="ב.עיצוב — תקשורת חזותית">B.Des — Visual Communication</p>
+            <p class="cv-item__school"
+               data-en="Holon Institute of Technology — HIT"
+               data-he="המכון הטכנולוגי חולון — HIT">Holon Institute of Technology — HIT</p>
+            <p class="cv-item__note"
+               data-en="Graduated with honors"
+               data-he="סיים בהצטיינות">Graduated with honors</p>
+          </div>
+          <span class="cv-item__period">2015 – 2019</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <footer class="footer">
+    <div class="footer__inner">
+      <p class="footer__copy">© 2026 Arye Kupershmit</p>
+      <div class="footer__links">
+        <a href="https://linkedin.com" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://instagram.com" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://facebook.com" target="_blank" rel="noopener">Facebook</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
