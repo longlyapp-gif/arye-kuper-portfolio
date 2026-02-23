@@ -1058,20 +1058,15 @@ a { color: inherit; text-decoration: none; }
 
 /* Case study sections */
 .cs-section {
-  padding: 5rem var(--pad-x);
+  padding: 5rem clamp(1.5rem, 4vw, 3rem);
   max-width: var(--max-w);
   margin: 0 auto;
   border-top: 1px solid #e8e2d6;
 }
-/* First section after hero/TOC — no top border */
+/* Remove top border after dark strip or TOC */
 .cs-section--dark + .cs-section,
-.cs-toc + .cs-section,
-.cs-section:first-of-type {
+.cs-toc + .cs-section {
   border-top: none;
-}
-
-.cs-section + .cs-section {
-  border-top: 1px solid var(--border);
 }
 
 .cs-section__label {
@@ -1098,38 +1093,37 @@ a { color: inherit; text-decoration: none; }
 
 .cs-section__body p + p { margin-top: 1.25rem; }
 
-/* Dark strip — only for Problem section */
+/* Dark strip — Problem section only (full width bg, capped content) */
 .cs-section--dark {
   background: var(--bg-dark);
   color: #f4efe6;
-  padding: 5rem var(--pad-x);
-  max-width: none;
-  margin: 0;
+  padding: 5rem 0;
 }
-.cs-section--dark > * {
-  max-width: calc(var(--max-w) - var(--pad-x) * 2);
-  margin-left: auto;
-  margin-right: auto;
-}
+.cs-section--dark > *,
 .cs-section--dark .cs-section__inner {
   max-width: var(--max-w);
-  margin: 0 auto;
-  padding: 0 var(--pad-x);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: clamp(1.5rem, 4vw, 3rem);
+  padding-right: clamp(1.5rem, 4vw, 3rem);
 }
 .cs-section--dark .cs-section__label { color: rgba(244,239,230,.4); }
 .cs-section--dark .cs-section__title { color: #f4efe6; }
 .cs-section--dark .cs-section__body  { color: rgba(244,239,230,.65); }
 
-/* Light sections that used to be dark — with top divider */
+/* Light sections (previously dark) — same layout as cs-section */
 .cs-section--light {
-  padding: 5rem var(--pad-x);
+  padding: 5rem clamp(1.5rem, 4vw, 3rem);
   max-width: var(--max-w);
   margin: 0 auto;
   border-top: 1px solid #e8e2d6;
 }
-.cs-section--light .cs-section__inner {
+/* Inner wrapper no longer needed — neutralize it */
+.cs-section--light .cs-section__inner,
+.cs-section--dark .cs-section__inner {
   max-width: 100%;
   padding: 0;
+  margin: 0;
 }
 
 /* Process steps */
