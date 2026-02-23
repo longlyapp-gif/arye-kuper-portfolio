@@ -18,7 +18,7 @@
   --text-dim:  #6b6860;
   --text-muted:#a09e9a;
   --accent:    #c8a87a;
-  --border:    rgba(26,26,24,.1);
+  --border:    rgba(63,61,59,.1);
 
   /* EN fonts */
   --heading:   'Montserrat', system-ui, sans-serif;
@@ -411,7 +411,7 @@ a { color: inherit; text-decoration: none; }
   color: var(--bg);
 }
 .btn--primary:hover {
-  background: #333;
+  background: #2e2c2a;
   transform: translateY(-1px);
 }
 
@@ -603,7 +603,7 @@ a { color: inherit; text-decoration: none; }
   transition: border-color .3s, transform .3s var(--ease-out);
 }
 .project-card:hover {
-  border-color: rgba(26,26,24,.25);
+  border-color: rgba(63,61,59,.25);
   transform: translateY(-4px);
 }
 
