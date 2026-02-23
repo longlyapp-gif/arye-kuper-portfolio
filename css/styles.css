@@ -865,36 +865,95 @@ a { color: inherit; text-decoration: none; }
 
 /* -- Footer ------------------------------------------------ */
 .footer {
-  border-top: 1px solid var(--border);
+  background: var(--bg-dark);
+  color: #f4efe6;
+  margin-top: 8rem;
 }
 
 .footer__inner {
   max-width: var(--max-w);
   margin: 0 auto;
-  padding: 2.5rem var(--pad-x);
+  padding: 5rem clamp(1.5rem, 4vw, 3rem) 3rem;
+}
+
+/* Top row: logo + nav */
+.footer__top {
   display: flex;
-  align-items: center;
   justify-content: space-between;
+  align-items: flex-start;
+  gap: 3rem;
+  padding-bottom: 4rem;
+  border-bottom: 1px solid rgba(244,239,230,.1);
+  flex-wrap: wrap;
+}
+
+.footer__logo img {
+  height: 28px;
+  opacity: .9;
+  filter: brightness(0) invert(1);
+}
+
+.footer__nav {
+  display: flex;
+  gap: 4rem;
+  flex-wrap: wrap;
+}
+
+.footer__nav-col {
+  display: flex;
+  flex-direction: column;
+  gap: .75rem;
+}
+
+.footer__nav-heading {
+  font-size: .7rem;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: rgba(244,239,230,.35);
+  margin-bottom: .25rem;
+}
+
+.footer__nav-col a {
+  font-size: .9375rem;
+  color: rgba(244,239,230,.65);
+  text-decoration: none;
+  transition: color .2s;
+}
+.footer__nav-col a:hover { color: #f4efe6; }
+
+/* Bottom row: copyright + social */
+.footer__bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 2rem;
   flex-wrap: wrap;
   gap: 1rem;
 }
 
 .footer__copy {
-  font-size: .875rem;
-  color: var(--text-muted);
+  font-size: .8125rem;
+  color: rgba(244,239,230,.3);
 }
 
-.footer__links {
+.footer__social {
   display: flex;
   gap: 1.5rem;
 }
 
-.footer__links a {
-  font-size: .875rem;
-  color: var(--text-muted);
+.footer__social a {
+  font-size: .8125rem;
+  color: rgba(244,239,230,.4);
+  text-decoration: none;
+  letter-spacing: .04em;
   transition: color .2s;
 }
-.footer__links a:hover { color: var(--text); }
+.footer__social a:hover { color: #f4efe6; }
+
+@media (max-width: 640px) {
+  .footer__top { flex-direction: column; gap: 2.5rem; }
+  .footer__nav { gap: 2rem; }
+}
 
 /* ============================================================
    Case Study Pages
