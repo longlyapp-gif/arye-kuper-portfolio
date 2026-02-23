@@ -867,7 +867,8 @@ a { color: inherit; text-decoration: none; }
 .footer {
   background: var(--bg-dark);
   color: #f4efe6;
-  margin-top: 8rem;
+  margin-top: 0;
+  border-top: 1px solid var(--border);
 }
 
 .footer__inner {
