@@ -140,7 +140,47 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     const target = document.querySelector(anchor.getAttribute('href'));
     if (target) {
       e.preventDefault();
-      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      const navH = document.querySelector('.nav')?.offsetHeight || 0;
+      const top  = target.getBoundingClientRect().top + window.scrollY - navH - 24;
+      window.scrollTo({ top, behavior: 'smooth' });
     }
   });
 });
+
+// -- TOC active item on scroll --------------------------------
+(function () {
+  const toc = document.querySelector('.cs-toc');
+  if (!toc) return;
+
+  const tocLinks = toc.querySelectorAll('.cs-toc__item');
+  if (!tocLinks.length) return;
+
+  const sectionIds = Array.from(tocLinks)
+    .map(a => a.getAttribute('href')?.replace('#', ''))
+    .filter(Boolean);
+
+  const sections = sectionIds
+    .map(id => document.getElementById(id))
+    .filter(Boolean);
+
+  function onScroll() {
+    const scrollY = window.scrollY;
+    const navH    = document.querySelector('.nav')?.offsetHeight || 0;
+    const offset  = navH + 80; // a bit below nav
+
+    let current = sections[0]?.id || '';
+    sections.forEach(sec => {
+      if (sec.getBoundingClientRect().top + scrollY - offset <= scrollY) {
+        current = sec.id;
+      }
+    });
+
+    tocLinks.forEach(a => {
+      const id = a.getAttribute('href')?.replace('#', '');
+      a.classList.toggle('active', id === current);
+    });
+  }
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll(); // run once on load
+})();

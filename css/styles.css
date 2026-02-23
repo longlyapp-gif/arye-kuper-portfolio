@@ -985,6 +985,50 @@ a { color: inherit; text-decoration: none; }
   font-style: italic;
 }
 
+/* Case study TOC nav */
+.cs-toc {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem;
+  padding: 2rem var(--pad-x);
+  max-width: var(--max-w);
+  margin: 0 auto 1rem;
+  border-bottom: 1px solid #e8e2d6;
+}
+.cs-toc__item {
+  font-size: .8125rem;
+  font-weight: 500;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  color: #999;
+  text-decoration: none;
+  padding: .4rem .85rem;
+  border-radius: 100px;
+  border: 1px solid transparent;
+  transition: color .2s, border-color .2s, background .2s;
+  white-space: nowrap;
+}
+.cs-toc__item:hover {
+  color: #1a1a1a;
+  border-color: #d8d3cb;
+  background: #f9f6f1;
+}
+.cs-toc__item.active {
+  color: #1a1a1a;
+  border-color: #1a1a1a;
+  background: transparent;
+}
+@media (max-width: 640px) {
+  .cs-toc {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding: 1.25rem var(--pad-x);
+    gap: .4rem;
+    scrollbar-width: none;
+  }
+  .cs-toc::-webkit-scrollbar { display: none; }
+}
+
 /* Case study image grids */
 .cs-img-grid {
   margin-top: 3rem;
