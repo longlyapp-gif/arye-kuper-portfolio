@@ -1333,3 +1333,76 @@ a { color: inherit; text-decoration: none; }
 /* RTL overrides */
 [dir="rtl"] .cs-hero__back::before { content: '→'; }
 [dir="rtl"] .cs-hero__back { flex-direction: row-reverse; }
+
+/* ============================================================
+   STICKY STACK — Section card transitions
+   ============================================================ */
+
+/* Hero is the base card — sits at the bottom of the stack */
+.hero { z-index: 1; }
+
+/* All sticky sections behave as cards sliding in from below */
+[data-stack] {
+  position: sticky;
+  top: var(--nav-h);
+  border-radius: 16px 16px 0 0;
+  /* clip-path instead of overflow:hidden — avoids breaking sticky on iOS Safari */
+  clip-path: inset(0 round 16px 16px 0 0);
+  will-change: transform;
+  /* subtle top shadow gives the card physical depth */
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, .1);
+}
+
+/* Stacking order — each card renders on top of the previous */
+.framework[data-stack="1"] { z-index: 10; }
+.work[data-stack="2"]      { z-index: 20; }
+.about[data-stack="3"]     { z-index: 30; }
+
+/* Footer: not sticky, but needs stacking context to sit above about */
+.footer {
+  position: relative;
+  z-index: 35;
+}
+
+/* Remove border-top on dark sections — conflicts with rounded card edge */
+.framework[data-stack],
+.about[data-stack] {
+  border-top: none;
+}
+
+/* Prevent .reveal on the section element itself from hiding sticky sections.
+   Child .reveal elements inside are NOT affected by this rule. */
+[data-stack].reveal {
+  opacity: 1 !important;
+  transform: none !important;
+  transition: none !important;
+}
+
+/* Work section: make full-bleed so card corners look correct.
+   Content width constraint moves to inner children. */
+.work {
+  max-width: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+}
+.work__header {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 8rem var(--pad-x) 0;
+  margin-bottom: 3rem;
+}
+.work__grid {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 0 var(--pad-x) 8rem;
+}
+
+/* Mobile: slightly tighter radius on small screens */
+@media (max-width: 480px) {
+  [data-stack] {
+    border-radius: 10px 10px 0 0;
+    clip-path: inset(0 round 10px 10px 0 0);
+  }
+}

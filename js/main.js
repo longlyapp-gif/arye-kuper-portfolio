@@ -44,7 +44,7 @@ if (savedLang && savedLang !== 'en') {
 }
 
 // -- Reveal on Scroll (IntersectionObserver) ----------------
-const revealEls = document.querySelectorAll('.reveal');
+const revealEls = document.querySelectorAll('.reveal:not([data-stack])');
 
 if ('IntersectionObserver' in window) {
   const observer = new IntersectionObserver((entries) => {
