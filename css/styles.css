@@ -1372,7 +1372,12 @@ a { color: inherit; text-decoration: none; }
   transition: none !important;
 }
 
-/* Mobile */
-@media (max-width: 480px) {
-  [data-stack] { border-radius: 10px 10px 0 0; }
+/* Mobile: disable sticky card effect — content is taller than viewport */
+@media (max-width: 860px) {
+  [data-stack] {
+    position: static;
+    min-height: unset;
+    border-radius: 0;
+    box-shadow: none;
+  }
 }
