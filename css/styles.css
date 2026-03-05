@@ -1377,8 +1377,8 @@ a { color: inherit; text-decoration: none; }
   padding: 2rem var(--pad-x) 8rem;
 }
 
-/* Footer: static, normal flow */
-.footer { position: static; z-index: auto; }
+/* Footer: above all sticky sections so it's never hidden behind About */
+.footer { position: relative; z-index: 40; }
 
 /* Explicit backgrounds on sticky card sections */
 .framework[data-stack] { background: var(--bg-dark); border-top: none; }
