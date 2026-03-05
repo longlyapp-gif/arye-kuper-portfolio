@@ -1345,9 +1345,8 @@ a { color: inherit; text-decoration: none; }
 [data-stack] {
   position: sticky;
   top: var(--nav-h);
-  overflow: hidden;
   border-radius: 16px 16px 0 0;
-  will-change: transform;
+  box-shadow: 0 -8px 24px rgba(0,0,0,0.12);
 }
 
 /* Stacking order */
