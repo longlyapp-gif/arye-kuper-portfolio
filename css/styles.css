@@ -1355,8 +1355,11 @@ a { color: inherit; text-decoration: none; }
 .work[data-stack="2"]      { z-index: 20; }
 .about[data-stack="3"]     { z-index: 30; }
 
-/* Footer: not sticky, sits above about */
-.footer { position: relative; z-index: 35; }
+/* Work: scrolls normally between Framework and About cards */
+.work { position: relative; z-index: 15; }
+
+/* Footer: static, normal flow */
+.footer { position: static; z-index: auto; }
 
 /* Explicit backgrounds on each section (needed for card to look solid) */
 .framework[data-stack] { background: var(--bg-dark); border-top: none; }
