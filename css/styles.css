@@ -1355,34 +1355,34 @@ a { color: inherit; text-decoration: none; }
 .work[data-stack="2"]      { z-index: 20; }
 .about[data-stack="3"]     { z-index: 30; }
 
-/* Work: scrolls normally between Framework and About cards */
-.work { position: relative; z-index: 15; }
-
-/* Footer: static, normal flow */
-.footer { position: static; z-index: auto; }
-
-/* Explicit backgrounds on each section (needed for card to look solid) */
-.framework[data-stack] { background: var(--bg-dark); border-top: none; }
-.about[data-stack]     { background: var(--bg-dark); border-top: none; }
-.work[data-stack]      { background: var(--bg); border-top: none; }
-
-/* Work full-bleed override (old rule had max-width on the section itself) */
-.work[data-stack] {
-  max-width: 100% !important;
-  width: 100% !important;
-  margin: 0 !important;
-  padding: 0 !important;
+/* Work: scrolls normally between Framework and About cards.
+   Must be full-bleed with explicit bg so Framework dark doesn't show through. */
+.work {
+  position: relative;
+  z-index: 15;
+  background: var(--bg);
+  max-width: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
 }
-.work[data-stack] .work__header {
+.work .work__header {
   max-width: var(--max-w);
   margin: 0 auto;
   padding: 8rem var(--pad-x) 0;
 }
-.work[data-stack] .work__grid {
+.work .work__grid {
   max-width: var(--max-w);
   margin: 0 auto;
   padding: 2rem var(--pad-x) 8rem;
 }
+
+/* Footer: static, normal flow */
+.footer { position: static; z-index: auto; }
+
+/* Explicit backgrounds on sticky card sections */
+.framework[data-stack] { background: var(--bg-dark); border-top: none; }
+.about[data-stack]     { background: var(--bg-dark); border-top: none; }
 
 /* Prevent section-level .reveal from hiding sticky sections */
 [data-stack].reveal {
