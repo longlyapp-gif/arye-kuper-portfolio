@@ -43,6 +43,37 @@ if (savedLang && savedLang !== 'en') {
   setLang(savedLang);
 }
 
+// -- Mobile side menu -----------------------------------------
+const navEl       = document.querySelector('.nav');
+const navBurger   = document.querySelector('.nav__burger');
+const navBackdrop = document.querySelector('.nav__backdrop');
+
+function closeMobileNav() {
+  navEl?.classList.remove('nav--open');
+  navBurger?.setAttribute('aria-expanded', 'false');
+  document.body.style.overflow = '';
+}
+
+function toggleMobileNav() {
+  const isOpen = navEl.classList.toggle('nav--open');
+  navBurger.setAttribute('aria-expanded', String(isOpen));
+  document.body.style.overflow = isOpen ? 'hidden' : '';
+}
+
+if (navBurger && navEl) {
+  navBurger.addEventListener('click', toggleMobileNav);
+  navBackdrop?.addEventListener('click', closeMobileNav);
+  document.querySelectorAll('.nav__actions .nav__link').forEach(link => {
+    link.addEventListener('click', closeMobileNav);
+  });
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closeMobileNav();
+  });
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 640) closeMobileNav();
+  });
+}
+
 // -- Reveal on Scroll (IntersectionObserver) ----------------
 const revealEls = document.querySelectorAll('.reveal:not([data-stack])');
 
