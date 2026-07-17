@@ -1476,7 +1476,7 @@ a { color: inherit; text-decoration: none; }
 
 /* ============================================================
    Desktop mockup — browser window frame for showcasing an image
-   Usage:
+   Usage (Mac, default):
      <div class="desktop-mockup reveal reveal-tilt">
        <div class="desktop-mockup__bar">
          <span class="desktop-mockup__dot desktop-mockup__dot--red"></span>
@@ -1486,6 +1486,18 @@ a { color: inherit; text-decoration: none; }
        <div class="desktop-mockup__screen">
          <img src="..." alt="..." />
        </div>
+     </div>
+   Add "desktop-mockup--windows" for the PC variant — swap the bar's
+   contents for right-aligned window controls instead of the dots:
+     <div class="desktop-mockup desktop-mockup--windows reveal reveal-tilt">
+       <div class="desktop-mockup__bar">
+         <span class="desktop-mockup__wincontrols">
+           <span class="desktop-mockup__winbtn">&#x2013;</span>
+           <span class="desktop-mockup__winbtn">&#x25A1;</span>
+           <span class="desktop-mockup__winbtn desktop-mockup__winbtn--close">&#x2715;</span>
+         </span>
+       </div>
+       <div class="desktop-mockup__screen"> ... </div>
      </div>
    ============================================================ */
 .desktop-mockup {
@@ -1522,6 +1534,35 @@ a { color: inherit; text-decoration: none; }
   height: 100%;
   object-fit: cover;
   display: block;
+}
+
+/* PC (Windows) variant — flat light title bar, controls on the right */
+.desktop-mockup--windows {
+  border-radius: 8px;
+}
+.desktop-mockup--windows .desktop-mockup__bar {
+  padding: 0;
+  background: #e6e6e6;
+  justify-content: flex-end;
+}
+.desktop-mockup__wincontrols {
+  display: flex;
+  height: 32px;
+}
+.desktop-mockup__winbtn {
+  width: 44px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: .7rem;
+  color: #333;
+  line-height: 1;
+  transition: background .12s, color .12s;
+}
+.desktop-mockup__winbtn--close:hover { background: #e81123; color: #fff; }
+.desktop-mockup--windows .desktop-mockup__screen {
+  aspect-ratio: 16 / 10;
 }
 
 /* ============================================================

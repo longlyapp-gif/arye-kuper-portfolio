@@ -58,17 +58,23 @@
     return wrapper;
   }
 
-  function wrapAsDesktop(img) {
+  function wrapAsDesktop(img, variant) {
     unwrap(img);
+    const isWindows = variant === 'windows';
     const wrapper = document.createElement('div');
-    wrapper.className = 'desktop-mockup reveal reveal-tilt';
-    wrapper.dataset.editorMockup = 'desktop';
+    wrapper.className = isWindows ? 'desktop-mockup desktop-mockup--windows reveal reveal-tilt' : 'desktop-mockup reveal reveal-tilt';
+    wrapper.dataset.editorMockup = isWindows ? 'desktop-windows' : 'desktop-mac';
     const bar = document.createElement('div');
     bar.className = 'desktop-mockup__bar';
-    bar.innerHTML =
-      '<span class="desktop-mockup__dot desktop-mockup__dot--red"></span>' +
-      '<span class="desktop-mockup__dot desktop-mockup__dot--yellow"></span>' +
-      '<span class="desktop-mockup__dot desktop-mockup__dot--green"></span>';
+    bar.innerHTML = isWindows
+      ? '<span class="desktop-mockup__wincontrols">' +
+        '<span class="desktop-mockup__winbtn">–</span>' +
+        '<span class="desktop-mockup__winbtn">□</span>' +
+        '<span class="desktop-mockup__winbtn desktop-mockup__winbtn--close">✕</span>' +
+        '</span>'
+      : '<span class="desktop-mockup__dot desktop-mockup__dot--red"></span>' +
+        '<span class="desktop-mockup__dot desktop-mockup__dot--yellow"></span>' +
+        '<span class="desktop-mockup__dot desktop-mockup__dot--green"></span>';
     const screen = document.createElement('div');
     screen.className = 'desktop-mockup__screen';
     img.parentNode.insertBefore(wrapper, img);
@@ -82,7 +88,8 @@
   function applyMockup(img, type) {
     if (type === 'phone-ios') wrapAsPhone(img, 'ios');
     else if (type === 'phone-android') wrapAsPhone(img, 'android');
-    else if (type === 'desktop') wrapAsDesktop(img);
+    else if (type === 'desktop-mac') wrapAsDesktop(img, 'mac');
+    else if (type === 'desktop-windows') wrapAsDesktop(img, 'windows');
     else unwrap(img);
     saveState();
     updatePanel();
@@ -121,7 +128,8 @@
     badgeEl.innerHTML =
       '<button class="editor-badge__btn" data-type="phone-ios" title="iPhone">\u{1F4F1}</button>' +
       '<button class="editor-badge__btn" data-type="phone-android" title="Android">\u{1F916}</button>' +
-      '<button class="editor-badge__btn" data-type="desktop" title="Desktop">\u{1F5A5}</button>' +
+      '<button class="editor-badge__btn" data-type="desktop-mac" title="Mac">\u{1F5A5}</button>' +
+      '<button class="editor-badge__btn" data-type="desktop-windows" title="PC (Windows)">\u{1FA9F}</button>' +
       '<button class="editor-badge__btn" data-type="none" title="Remove mockup">✕</button>';
     document.body.appendChild(badgeEl);
     badgeEl.addEventListener('mouseenter', cancelHide);
@@ -141,8 +149,8 @@
     badge.style.display = 'flex';
     const top = Math.max(8, rect.top - 44);
     const left = Math.min(
-      Math.max(8, rect.left + rect.width / 2 - 80),
-      window.innerWidth - 168
+      Math.max(8, rect.left + rect.width / 2 - 100),
+      window.innerWidth - 208
     );
     badge.style.top = top + 'px';
     badge.style.left = left + 'px';
