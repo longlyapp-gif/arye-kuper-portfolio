@@ -12,6 +12,11 @@
     '.cs-img-grid img, .project-card__img, .phone-mockup__screen img, .desktop-mockup__screen img';
   const STORAGE_KEY = 'editorMockups:' + location.pathname;
 
+  const STATUSBAR_ICONS =
+    '<svg width="15" height="10" viewBox="0 0 16 10" fill="#fff"><rect x="0" y="6" width="2.3" height="4" rx="0.5"/><rect x="4.3" y="4" width="2.3" height="6" rx="0.5"/><rect x="8.6" y="2" width="2.3" height="8" rx="0.5"/><rect x="12.9" y="0" width="2.3" height="10" rx="0.5"/></svg>' +
+    '<svg width="14" height="11" viewBox="0 0 16 12" fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round"><path d="M1 4.5C5.5 0.5 10.5 0.5 15 4.5"/><path d="M3.7 7.3C6.5 4.8 9.5 4.8 12.3 7.3"/><circle cx="8" cy="10" r="1" fill="#fff" stroke="none"/></svg>' +
+    '<svg width="22" height="11" viewBox="0 0 24 12" fill="none"><rect x="0.5" y="0.5" width="20" height="11" rx="2.5" stroke="#fff" stroke-opacity=".6"/><rect x="2" y="2" width="15" height="8" rx="1.2" class="icon-battery-fill"/><rect x="21.5" y="4" width="2" height="4" rx="1" fill="#fff" fill-opacity=".6"/></svg>';
+
   let badgeEl = null;
   let hideTimer = null;
   let panelEl = null;
@@ -29,20 +34,27 @@
     }
   }
 
-  function wrapAsPhone(img) {
+  function wrapAsPhone(img, variant) {
     unwrap(img);
     const wrapper = document.createElement('div');
-    wrapper.className = 'phone-mockup reveal reveal-tilt';
-    wrapper.dataset.editorMockup = 'phone';
+    wrapper.className = variant === 'android' ? 'phone-mockup phone-mockup--android reveal reveal-tilt' : 'phone-mockup reveal reveal-tilt';
+    wrapper.dataset.editorMockup = variant === 'android' ? 'phone-android' : 'phone-ios';
     const notch = document.createElement('div');
     notch.className = 'phone-mockup__notch';
     const screen = document.createElement('div');
     screen.className = 'phone-mockup__screen';
+    const statusbar = document.createElement('div');
+    statusbar.className = 'phone-mockup__statusbar';
+    statusbar.innerHTML =
+      '<span class="phone-mockup__time"></span>' +
+      '<span class="phone-mockup__icons">' + STATUSBAR_ICONS + '</span>';
     img.parentNode.insertBefore(wrapper, img);
+    screen.appendChild(statusbar);
     screen.appendChild(img);
     wrapper.appendChild(notch);
     wrapper.appendChild(screen);
     requestAnimationFrame(() => wrapper.classList.add('visible'));
+    window.__updatePhoneClocks && window.__updatePhoneClocks();
     return wrapper;
   }
 
@@ -68,7 +80,8 @@
   }
 
   function applyMockup(img, type) {
-    if (type === 'phone') wrapAsPhone(img);
+    if (type === 'phone-ios') wrapAsPhone(img, 'ios');
+    else if (type === 'phone-android') wrapAsPhone(img, 'android');
     else if (type === 'desktop') wrapAsDesktop(img);
     else unwrap(img);
     saveState();
@@ -106,7 +119,8 @@
     badgeEl = document.createElement('div');
     badgeEl.className = 'editor-badge';
     badgeEl.innerHTML =
-      '<button class="editor-badge__btn" data-type="phone" title="Phone">\u{1F4F1}</button>' +
+      '<button class="editor-badge__btn" data-type="phone-ios" title="iPhone">\u{1F4F1}</button>' +
+      '<button class="editor-badge__btn" data-type="phone-android" title="Android">\u{1F916}</button>' +
       '<button class="editor-badge__btn" data-type="desktop" title="Desktop">\u{1F5A5}</button>' +
       '<button class="editor-badge__btn" data-type="none" title="Remove mockup">✕</button>';
     document.body.appendChild(badgeEl);
@@ -127,8 +141,8 @@
     badge.style.display = 'flex';
     const top = Math.max(8, rect.top - 44);
     const left = Math.min(
-      Math.max(8, rect.left + rect.width / 2 - 60),
-      window.innerWidth - 128
+      Math.max(8, rect.left + rect.width / 2 - 80),
+      window.innerWidth - 168
     );
     badge.style.top = top + 'px';
     badge.style.left = left + 'px';

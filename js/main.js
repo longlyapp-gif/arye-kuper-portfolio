@@ -79,6 +79,24 @@ if (navBurger && navEl) {
   });
 }
 
+// -- Phone mockup status bar clock ----------------------------
+function updatePhoneClocks() {
+  const now = new Date();
+  let hours12 = now.getHours() % 12;
+  if (hours12 === 0) hours12 = 12;
+  const minutes = String(now.getMinutes()).padStart(2, '0');
+  const iosTime = hours12 + ':' + minutes;
+  const androidTime = String(now.getHours()).padStart(2, '0') + ':' + minutes;
+
+  document.querySelectorAll('.phone-mockup__time').forEach(el => {
+    const isAndroid = !!el.closest('.phone-mockup--android');
+    el.textContent = isAndroid ? androidTime : iosTime;
+  });
+}
+window.__updatePhoneClocks = updatePhoneClocks;
+updatePhoneClocks();
+setInterval(updatePhoneClocks, 10000);
+
 // -- Reveal on Scroll (IntersectionObserver) ----------------
 const revealEls = document.querySelectorAll('.reveal:not([data-stack])');
 

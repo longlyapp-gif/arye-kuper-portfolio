@@ -1385,13 +1385,20 @@ a { color: inherit; text-decoration: none; }
 
 /* ============================================================
    Phone mockup — device frame for showcasing a single image
-   Usage:
+   Usage (iOS, default):
      <div class="phone-mockup reveal reveal-tilt">
        <div class="phone-mockup__notch"></div>
        <div class="phone-mockup__screen">
+         <div class="phone-mockup__statusbar">
+           <span class="phone-mockup__time">9:41</span>
+           <span class="phone-mockup__icons">...</span>
+         </div>
          <img src="..." alt="..." />
        </div>
      </div>
+   Add "phone-mockup--android" for the Android variant (punch-hole
+   camera instead of a notch, 24h clock). The status bar's time
+   text is kept live by js/main.js.
    ============================================================ */
 .phone-mockup {
   position: relative;
@@ -1416,6 +1423,19 @@ a { color: inherit; text-decoration: none; }
   border-radius: 100px;
   z-index: 2;
 }
+/* Android variant — small centered punch-hole camera instead of a notch */
+.phone-mockup--android {
+  border-radius: 1.75rem;
+}
+.phone-mockup--android .phone-mockup__notch {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  top: 20px;
+}
+.phone-mockup--android .phone-mockup__screen {
+  border-radius: .9rem;
+}
 .phone-mockup__screen {
   position: relative;
   width: 100%;
@@ -1430,6 +1450,29 @@ a { color: inherit; text-decoration: none; }
   object-fit: cover;
   display: block;
 }
+.phone-mockup__statusbar {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  background: linear-gradient(to bottom, rgba(0,0,0,.4), transparent);
+  color: #fff;
+  font-size: .7rem;
+  font-weight: 600;
+  font-family: var(--f-body);
+  letter-spacing: .02em;
+  z-index: 1;
+}
+.phone-mockup__icons {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.phone-mockup__icons svg { display: block; }
+.phone-mockup__icons .icon-battery-fill { fill: #fff; }
 
 /* ============================================================
    Desktop mockup — browser window frame for showcasing an image
