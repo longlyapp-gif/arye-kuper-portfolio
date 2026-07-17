@@ -4,6 +4,11 @@
 
 'use strict';
 
+// Captured synchronously during this script's own execution — needed to
+// resolve editor.js's path relative to main.js regardless of page depth
+// (root pages use js/, case-study pages use ../js/).
+const mainScriptSrc = document.currentScript ? document.currentScript.src : '';
+
 // -- Language Toggle ----------------------------------------
 const html        = document.documentElement;
 const langToggle  = document.getElementById('langToggle');
@@ -214,4 +219,28 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll(); // run once on load
+})();
+
+// -- Editor mode (device mockup placement tool) ---------------
+(function () {
+  const toggle = document.createElement('button');
+  toggle.className = 'editor-toggle';
+  toggle.setAttribute('aria-label', 'Toggle editor mode');
+  toggle.textContent = '✎';
+  document.body.appendChild(toggle);
+
+  let loaded = false;
+
+  toggle.addEventListener('click', () => {
+    if (!loaded) {
+      loaded = true;
+      const script = document.createElement('script');
+      script.src = mainScriptSrc ? new URL('editor.js', mainScriptSrc).href : 'js/editor.js';
+      script.dataset.editorScript = 'true';
+      script.onload = () => window.__editorInit && window.__editorInit();
+      document.body.appendChild(script);
+    } else {
+      window.__editorToggle && window.__editorToggle();
+    }
+  });
 })();

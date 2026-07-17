@@ -1481,6 +1481,109 @@ a { color: inherit; text-decoration: none; }
   display: block;
 }
 
+/* ============================================================
+   Editor Mode — dev tool for visually assigning device mockups
+   Inert unless .editor-mode is toggled on; see js/main.js + js/editor.js
+   ============================================================ */
+.editor-toggle {
+  position: fixed;
+  bottom: 1.25rem;
+  left: 1.25rem;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--text-dim);
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  opacity: .35;
+  transition: opacity .2s, color .2s, border-color .2s;
+  z-index: 300;
+}
+.editor-toggle:hover,
+.editor-toggle.is-active {
+  opacity: 1;
+  color: var(--text);
+  border-color: var(--text);
+}
+
+.editor-mode .editor-candidate {
+  cursor: pointer;
+  outline: 2px dashed transparent;
+  outline-offset: 2px;
+  transition: outline-color .15s;
+}
+.editor-mode .editor-candidate:hover,
+.editor-mode .editor-candidate.editor-hover {
+  outline-color: #7a6cf0;
+}
+
+.editor-badge {
+  position: fixed;
+  display: flex;
+  gap: 4px;
+  padding: 6px;
+  background: #1a1a18;
+  border-radius: 100px;
+  box-shadow: 0 8px 20px rgba(0,0,0,.25);
+  z-index: 310;
+}
+.editor-badge__btn {
+  width: 32px;
+  height: 32px;
+  border: none;
+  border-radius: 50%;
+  background: transparent;
+  font-size: 1rem;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background .15s;
+}
+.editor-badge__btn:hover { background: rgba(255,255,255,.15); }
+
+.editor-panel {
+  position: fixed;
+  bottom: 1.25rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  padding: .6rem 1rem;
+  background: #1a1a18;
+  color: #f4efe6;
+  border-radius: 100px;
+  box-shadow: 0 8px 24px rgba(0,0,0,.3);
+  font-size: .8125rem;
+  z-index: 300;
+}
+.editor-panel__count { opacity: .7; white-space: nowrap; }
+.editor-panel__btn {
+  border: 1px solid rgba(244,239,230,.3);
+  background: transparent;
+  color: #f4efe6;
+  border-radius: 100px;
+  padding: .4rem .9rem;
+  font-size: .8125rem;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background .15s, border-color .2s;
+}
+.editor-panel__btn:hover { background: rgba(244,239,230,.12); border-color: rgba(244,239,230,.5); }
+.editor-panel__btn--primary { background: #f4efe6; color: #1a1a18; border-color: #f4efe6; }
+.editor-panel__btn--primary:hover { background: #e5ddcd; }
+
+@media (max-width: 640px) {
+  .editor-panel { flex-wrap: wrap; justify-content: center; width: min(92vw, 360px); }
+}
+
 /* Staggered animations for items in a container */
 .reveal-stagger .reveal:nth-child(1) { transition-delay: .1s; }
 .reveal-stagger .reveal:nth-child(2) { transition-delay: .2s; }
