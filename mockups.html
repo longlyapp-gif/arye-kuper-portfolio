@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" data-lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Device Mockups | Arye Kupersmidt</title>
+  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="nav">
+    <a class="nav__logo" href="index.html" aria-label="Arye Kupersmidt – Home">
+      <img src="assets/logo-name.svg" alt="Arye Kupersmidt" class="nav__logo-img" />
+    </a>
+    <button class="nav__burger" id="navBurger" aria-label="Menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <div class="nav__actions">
+      <a href="index.html#work" class="nav__link" data-en="Work" data-he="עבודות">Work</a>
+      <a href="index.html#about" class="nav__link" data-en="About" data-he="אודות">About</a>
+      <a href="cv.html" class="nav__link" data-en="CV" data-he="קורות חיים">CV</a>
+      <button class="lang-toggle" id="langToggle" aria-label="Switch language">
+        <span class="lang-toggle__en">EN</span>
+        <span class="lang-toggle__sep">/</span>
+        <span class="lang-toggle__he">עב</span>
+      </button>
+    </div>
+  </nav>
+  <div class="nav__backdrop"></div>
+
+  <div style="padding: calc(var(--nav-h) + 5rem) var(--pad-x) 3rem; max-width: var(--max-w); margin: 0 auto;">
+    <p class="cs-section__label" data-en="Components" data-he="רכיבים">Components</p>
+    <h1 class="cs-hero__title" style="font-size: clamp(2.2rem, 5vw, 3.5rem);">Device Mockups</h1>
+    <p class="cs-hero__sub"
+       data-en="Reusable device frames — drop any image into the screen slot. Scroll down to see each one tilt into place."
+       data-he="מסגרות מכשיר לשימוש חוזר — מכניסים כל תמונה לתוך חריץ המסך. גללו למטה כדי לראות כל אחת נכנסת בהטיה.">
+      Reusable device frames — drop any image into the screen slot. Scroll down to see each one tilt into place.
+    </p>
+  </div>
+
+  <!-- Spacer so the first mockup starts below the fold, to demo the scroll-triggered animation -->
+  <div style="height: 50vh;"></div>
+
+  <!-- PHONE -->
+  <div style="padding: 0 var(--pad-x); max-width: var(--max-w); margin: 0 auto 2rem;">
+    <p class="cs-section__label" style="text-align:center;" data-en="Phone" data-he="טלפון">Phone</p>
+  </div>
+  <div style="padding: 0 var(--pad-x); max-width: var(--max-w); margin: 0 auto 3rem;">
+    <div class="phone-mockup reveal reveal-tilt">
+      <div class="phone-mockup__notch"></div>
+      <div class="phone-mockup__screen">
+        <img src="assets/n12.jpg" alt="Placeholder screenshot — swap with your own portrait image" loading="lazy" />
+      </div>
+    </div>
+    <p class="cs-section__body" style="max-width: 46rem; margin: 1.5rem auto 0; text-align:center;"
+       data-en="Note: this is a placeholder crop (the site's existing images are wide landscape graphics, not portrait screenshots). Swap the <img> source for a real portrait screenshot to use this for real."
+       data-he="הערה: זהו חיתוך זמני להדגמה (התמונות הקיימות באתר רוחביות, לא צילומי מסך אנכיים). כדי להשתמש בזה בפועל, פשוט מחליפים את מקור ה-<img> בצילום מסך אנכי אמיתי.">
+      Note: this is a placeholder crop (the site's existing images are wide landscape graphics, not portrait screenshots). Swap the &lt;img&gt; source for a real portrait screenshot to use this for real.
+    </p>
+  </div>
+
+  <div style="height: 30vh;"></div>
+
+  <!-- DESKTOP -->
+  <div style="padding: 0 var(--pad-x); max-width: var(--max-w); margin: 0 auto 2rem;">
+    <p class="cs-section__label" style="text-align:center;" data-en="Desktop" data-he="דסקטופ">Desktop</p>
+  </div>
+  <div style="padding: 0 var(--pad-x); max-width: var(--max-w); margin: 0 auto 6rem;">
+    <div class="desktop-mockup reveal reveal-tilt">
+      <div class="desktop-mockup__bar">
+        <span class="desktop-mockup__dot desktop-mockup__dot--red"></span>
+        <span class="desktop-mockup__dot desktop-mockup__dot--yellow"></span>
+        <span class="desktop-mockup__dot desktop-mockup__dot--green"></span>
+      </div>
+      <div class="desktop-mockup__screen">
+        <img src="assets/12plus/interface-1.jpg" alt="Placeholder screenshot — swap with your own landscape image" loading="lazy" />
+      </div>
+    </div>
+    <p class="cs-section__body" style="max-width: 46rem; margin: 1.5rem auto 0; text-align:center;"
+       data-en="This frame matches the site's existing landscape images well — real case-study screenshots can go straight in without cropping."
+       data-he="המסגרת הזו מתאימה היטב לתמונות הרוחביות הקיימות באתר — צילומי מסך אמיתיים מהסטדי קייסים יכולים להיכנס ישירות בלי חיתוך.">
+      This frame matches the site's existing landscape images well — real case-study screenshots can go straight in without cropping.
+    </p>
+  </div>
+
+  <footer class="footer">
+    <div class="footer__inner">
+      <div class="footer__top">
+        <a class="footer__logo" href="index.html">
+          <img src="assets/logo-name.svg" alt="Arye Kupersmidt" />
+        </a>
+        <nav class="footer__nav">
+          <div class="footer__nav-col">
+            <span class="footer__nav-heading" data-en="Work" data-he="עבודות">Work</span>
+            <a href="case-studies/n12.html" data-en="N12" data-he="N12">N12</a>
+            <a href="case-studies/12plus.html" data-en="12+" data-he="12+">12+</a>
+            <a href="case-studies/longly.html" data-en="Longly" data-he="לונגלי">Longly</a>
+            <a href="case-studies/brain12.html" data-en="Brain12" data-he="בריין12">Brain12</a>
+          </div>
+          <div class="footer__nav-col">
+            <span class="footer__nav-heading" data-en="About" data-he="אודות">About</span>
+            <a href="index.html#about" data-en="About me" data-he="אודותי">About me</a>
+            <a href="cv.html" data-en="CV" data-he="קורות חיים">CV</a>
+          </div>
+          <div class="footer__nav-col">
+            <span class="footer__nav-heading" data-en="Connect" data-he="קשר">Connect</span>
+            <a href="https://linkedin.com/in/aryekupersmidt" target="_blank" rel="noopener">LinkedIn</a>
+            <a href="https://instagram.com/arye.design" target="_blank" rel="noopener">Instagram</a>
+            <a href="mailto:arye@example.com">Email</a>
+          </div>
+        </nav>
+      </div>
+      <div class="footer__bottom">
+        <p class="footer__copy" data-en="© 2025 Arye Kupersmidt" data-he="© 2025 אריה קופרסמידט">© 2025 Arye Kupersmidt</p>
+        <div class="footer__social">
+          <a href="https://linkedin.com/in/aryekupersmidt" target="_blank" rel="noopener">LinkedIn</a>
+          <a href="https://instagram.com/arye.design" target="_blank" rel="noopener">Instagram</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

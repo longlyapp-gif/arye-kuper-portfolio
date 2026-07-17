@@ -1374,6 +1374,113 @@ a { color: inherit; text-decoration: none; }
   transform: none;
 }
 
+/* Tilt-in variant — for elements that should rotate into place (e.g. phone mockups) */
+.reveal-tilt {
+  transform: perspective(1200px) rotateY(18deg) rotateX(6deg) translateY(50px) scale(.92);
+  transition: opacity .9s var(--ease-out), transform .9s var(--ease-out);
+}
+.reveal-tilt.visible {
+  transform: perspective(1200px) rotateY(0deg) rotateX(0deg) translateY(0) scale(1);
+}
+
+/* ============================================================
+   Phone mockup — device frame for showcasing a single image
+   Usage:
+     <div class="phone-mockup reveal reveal-tilt">
+       <div class="phone-mockup__notch"></div>
+       <div class="phone-mockup__screen">
+         <img src="..." alt="..." />
+       </div>
+     </div>
+   ============================================================ */
+.phone-mockup {
+  position: relative;
+  width: min(260px, 62vw);
+  aspect-ratio: 9 / 19.5;
+  margin: 0 auto;
+  padding: 14px;
+  background: #111;
+  border-radius: 2.75rem;
+  box-shadow: 0 24px 60px rgba(0,0,0,.28), 0 0 0 1px rgba(255,255,255,.04) inset;
+  transform-style: preserve-3d;
+  box-sizing: border-box;
+}
+.phone-mockup__notch {
+  position: absolute;
+  top: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 34%;
+  height: 22px;
+  background: #111;
+  border-radius: 100px;
+  z-index: 2;
+}
+.phone-mockup__screen {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 1.9rem;
+  overflow: hidden;
+  background: #000;
+}
+.phone-mockup__screen img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* ============================================================
+   Desktop mockup — browser window frame for showcasing an image
+   Usage:
+     <div class="desktop-mockup reveal reveal-tilt">
+       <div class="desktop-mockup__bar">
+         <span class="desktop-mockup__dot desktop-mockup__dot--red"></span>
+         <span class="desktop-mockup__dot desktop-mockup__dot--yellow"></span>
+         <span class="desktop-mockup__dot desktop-mockup__dot--green"></span>
+       </div>
+       <div class="desktop-mockup__screen">
+         <img src="..." alt="..." />
+       </div>
+     </div>
+   ============================================================ */
+.desktop-mockup {
+  width: min(760px, 100%);
+  margin: 0 auto;
+  border-radius: 14px;
+  overflow: hidden;
+  background: #111;
+  box-shadow: 0 30px 70px rgba(0,0,0,.24), 0 0 0 1px rgba(255,255,255,.04) inset;
+  transform-style: preserve-3d;
+}
+.desktop-mockup__bar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 12px 14px;
+  background: #1c1c1c;
+}
+.desktop-mockup__dot {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+}
+.desktop-mockup__dot--red    { background: #ff5f57; }
+.desktop-mockup__dot--yellow { background: #febc2e; }
+.desktop-mockup__dot--green  { background: #28c840; }
+.desktop-mockup__screen {
+  aspect-ratio: 16 / 10;
+  background: #000;
+  overflow: hidden;
+}
+.desktop-mockup__screen img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
 /* Staggered animations for items in a container */
 .reveal-stagger .reveal:nth-child(1) { transition-delay: .1s; }
 .reveal-stagger .reveal:nth-child(2) { transition-delay: .2s; }
