@@ -1668,6 +1668,134 @@ a { color: inherit; text-decoration: none; }
   .editor-panel { flex-wrap: wrap; justify-content: center; width: min(92vw, 360px); }
 }
 
+.editor-save-status {
+  opacity: .55;
+  min-width: 4.5rem;
+  white-space: nowrap;
+}
+
+/* Text elements editable in editor mode */
+.editor-mode [data-editor-kind="text"] {
+  cursor: text;
+}
+/* The hero's blur/sharp layers are pointer-events:none for visitors (so the
+   spotlight effect isn't interrupted by hovering text) — re-enable in editor
+   mode so the hero title/subtitle/tag can be clicked into edit. */
+.editor-mode .hero__layer--blur,
+.editor-mode .hero__layer--sharp {
+  pointer-events: auto;
+}
+.editor-editing {
+  outline: 2px solid #7a6cf0;
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* Drag handle for resizing an image / mockup in editor mode */
+.editor-resize-handle {
+  position: fixed;
+  display: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 4px;
+  background: #7a6cf0;
+  border: 2px solid #fff;
+  box-shadow: 0 2px 8px rgba(0,0,0,.3);
+  cursor: nwse-resize;
+  z-index: 310;
+}
+
+/* Auth modal — gate before entering editor mode */
+.editor-modal {
+  position: fixed;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background: rgba(26,26,24,.55);
+  z-index: 400;
+}
+.editor-modal__card {
+  width: min(90vw, 320px);
+  background: #f4efe6;
+  color: #1a1a18;
+  border-radius: 12px;
+  padding: 1.75rem;
+  box-shadow: 0 24px 60px rgba(0,0,0,.35);
+}
+.editor-modal__title {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+.editor-modal__input {
+  width: 100%;
+  padding: .65rem .8rem;
+  border: 1px solid rgba(26,26,24,.2);
+  border-radius: 8px;
+  font-size: .95rem;
+  background: #fff;
+  color: #1a1a18;
+}
+.editor-modal__error {
+  min-height: 1.2em;
+  font-size: .8rem;
+  color: #c8000b;
+  margin-top: .5rem;
+}
+.editor-modal__actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: .5rem;
+  margin-top: .75rem;
+}
+.editor-modal__actions .editor-panel__btn {
+  color: #1a1a18;
+  border-color: rgba(26,26,24,.25);
+}
+.editor-modal__actions .editor-panel__btn:hover { background: rgba(26,26,24,.08); }
+.editor-modal__actions .editor-panel__btn--primary:hover { background: #e5ddcd; }
+
+/* Case-study content blocks — added via the editor's "+ Add block" panel */
+.cs-block {
+  position: relative;
+  padding: 0 var(--pad-x);
+  max-width: var(--max-w);
+  margin: 0 auto 3rem;
+}
+.cs-block--heading .cs-block__inner { max-width: 65ch; }
+.cs-block--paragraph .cs-block__inner { max-width: 65ch; }
+.cs-block--mockup .cs-block__inner { display: flex; justify-content: center; }
+
+.cs-block__controls {
+  position: absolute;
+  top: -2.25rem;
+  right: var(--pad-x);
+  display: flex;
+  gap: 2px;
+  padding: 3px;
+  background: #1a1a18;
+  border-radius: 100px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .15s;
+}
+.editor-mode .cs-block:hover .cs-block__controls {
+  opacity: 1;
+  pointer-events: auto;
+}
+.cs-block__controls button {
+  width: 26px;
+  height: 26px;
+  border: none;
+  border-radius: 50%;
+  background: transparent;
+  color: #f4efe6;
+  font-size: .85rem;
+  cursor: pointer;
+}
+.cs-block__controls button:hover { background: rgba(255,255,255,.15); }
+
 /* Staggered animations for items in a container */
 .reveal-stagger .reveal:nth-child(1) { transition-delay: .1s; }
 .reveal-stagger .reveal:nth-child(2) { transition-delay: .2s; }

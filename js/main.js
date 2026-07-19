@@ -38,6 +38,10 @@ function toggleLang() {
   setLang(current === 'en' ? 'he' : 'en');
 }
 
+// Exposed so js/content.js can refresh visible text after hydrating
+// data-en/data-he attributes with saved editor content.
+window.__refreshLang = () => setLang(html.getAttribute('data-lang') || 'en');
+
 if (langToggle) {
   langToggle.addEventListener('click', toggleLang);
 }
