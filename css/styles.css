@@ -1405,42 +1405,42 @@ a { color: inherit; text-decoration: none; }
   width: min(260px, 62vw);
   aspect-ratio: 9 / 19.5;
   margin: 0 auto;
-  padding: 14px;
+  padding: 8px;
   background: #111;
-  border-radius: 2.75rem;
+  border-radius: 2.4rem;
   box-shadow: 0 24px 60px rgba(0,0,0,.28), 0 0 0 1px rgba(255,255,255,.04) inset;
   transform-style: preserve-3d;
   box-sizing: border-box;
 }
 .phone-mockup__notch {
   position: absolute;
-  top: 14px;
+  top: 6px;
   left: 50%;
   transform: translateX(-50%);
   width: 34%;
-  height: 22px;
+  height: 20px;
   background: #111;
   border-radius: 100px;
   z-index: 2;
 }
 /* Android variant — small centered punch-hole camera instead of a notch */
 .phone-mockup--android {
-  border-radius: 1.75rem;
+  border-radius: 1.6rem;
 }
 .phone-mockup--android .phone-mockup__notch {
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  top: 20px;
+  top: 10px;
 }
 .phone-mockup--android .phone-mockup__screen {
-  border-radius: .9rem;
+  border-radius: .85rem;
 }
 .phone-mockup__screen {
   position: relative;
   width: 100%;
   height: 100%;
-  border-radius: 1.9rem;
+  border-radius: 1.7rem;
   overflow: hidden;
   background: #000;
 }
@@ -1563,6 +1563,41 @@ a { color: inherit; text-decoration: none; }
 .desktop-mockup__winbtn--close:hover { background: #e81123; color: #fff; }
 .desktop-mockup--windows .desktop-mockup__screen {
   aspect-ratio: 16 / 10;
+}
+
+/* ============================================================
+   Mockup groups — layout helpers for combining frames together
+   Usage:
+     <div class="mockup-combo"> ... one .phone-mockup + one .desktop-mockup ... </div>
+     <div class="phone-mockup-row"> ... two or three .phone-mockup ... </div>
+   ============================================================ */
+.mockup-combo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(1.5rem, 5vw, 4rem);
+  flex-wrap: wrap;
+}
+.mockup-combo .desktop-mockup {
+  flex: 1 1 380px;
+  max-width: 460px;
+}
+.mockup-combo .phone-mockup {
+  flex: 0 0 auto;
+}
+
+.phone-mockup-row {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+.phone-mockup-row .phone-mockup {
+  width: min(190px, 40vw);
+}
+.phone-mockup-row--3 .phone-mockup {
+  width: min(160px, 30vw);
 }
 
 /* ============================================================
