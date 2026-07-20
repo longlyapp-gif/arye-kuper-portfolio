@@ -1640,6 +1640,11 @@ a { color: inherit; text-decoration: none; }
 .editor-mode .editor-candidate.editor-hover {
   outline-color: #7a6cf0;
 }
+/* Click-selected image — badge/handle stay open until you click elsewhere */
+.editor-mode .editor-candidate.editor-selected {
+  outline-style: solid;
+  outline-color: #7a6cf0;
+}
 
 .editor-badge {
   position: fixed;

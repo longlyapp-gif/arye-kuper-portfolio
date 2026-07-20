@@ -349,15 +349,23 @@
     }
   }
 
-  async function hydrate() {
-    tagOriginalImages();
-    let data;
-    try {
-      data = await backend.getPage();
-    } catch (e) {
-      console.warn('[content] failed to load page content', e);
-      data = { edits: {}, blocks: [] };
-    }
+  // Last-known-good copy of the page's saved edits, kept in localStorage so
+  // a repeat visit can apply them the instant the DOM is ready instead of
+  // waiting on the Firestore round-trip — the edits are what visitors should
+  // see first, not a flash of the original hand-written HTML beforehand.
+  const CACHE_KEY = 'siteContentCache:' + SLUG;
+
+  function readCache() {
+    try { return JSON.parse(localStorage.getItem(CACHE_KEY) || 'null'); }
+    catch (e) { return null; }
+  }
+
+  function writeCache(data) {
+    try { localStorage.setItem(CACHE_KEY, JSON.stringify(data)); }
+    catch (e) { /* storage full/unavailable — cache is a best-effort optimization */ }
+  }
+
+  function applyData(data) {
     data = data || {};
     data.edits = data.edits || {};
     data.blocks = data.blocks || [];
@@ -377,6 +385,30 @@
 
     if (window.__refreshLang) window.__refreshLang();
     if (window.__updatePhoneClocks) window.__updatePhoneClocks();
+  }
+
+  async function hydrate() {
+    tagOriginalImages();
+
+    const cached = readCache();
+    if (cached) applyData(cached);
+
+    let data;
+    try {
+      data = await backend.getPage();
+    } catch (e) {
+      console.warn('[content] failed to load page content', e);
+      data = cached || { edits: {}, blocks: [] };
+    }
+    data = data || {};
+    data.edits = data.edits || {};
+    data.blocks = data.blocks || [];
+
+    // Only re-apply (and re-render case-study blocks) if the fetch actually
+    // turned up something different from what was already on screen.
+    if (!cached || JSON.stringify(data) !== JSON.stringify(cached)) applyData(data);
+    writeCache(data);
+
     document.dispatchEvent(new CustomEvent('content:hydrated'));
   }
 
@@ -402,7 +434,7 @@
     applyMockup,
     renderBlock,
     getPage: () => backend.getPage(),
-    savePage: (data) => backend.savePage(data),
+    savePage: (data) => backend.savePage(data).then(() => writeCache(data)),
     uploadImage: (key, file) => backend.uploadImage(key, file),
     signIn: (email, code) => backend.signIn(email, code),
     signOut: () => backend.signOut(),

@@ -20,8 +20,8 @@
   let resizeHandleEl = null;
   let panelEl = null;
   let modalEl = null;
-  let hideTimer = null;
   let saveTimer = null;
+  let selectedImg = null;
 
   // -- Data helpers -----------------------------------------------
   function getData() {
@@ -191,15 +191,13 @@
       '<button class="editor-badge__btn" data-type="desktop-windows" title="PC (Windows)">\u{1FA9F}</button>' +
       '<button class="editor-badge__btn" data-type="none" title="Remove mockup">✕</button>';
     document.body.appendChild(badgeEl);
-    badgeEl.addEventListener('mouseenter', cancelHide);
-    badgeEl.addEventListener('mouseleave', scheduleHide);
     badgeEl.addEventListener('click', e => {
       const btn = e.target.closest('.editor-badge__btn');
       if (!btn || !badgeEl.currentImg) return;
       const img = badgeEl.currentImg;
       if (btn.dataset.type === 'replace') pickReplacementImage(img);
       else setImageMockup(img, btn.dataset.type);
-      hideBadge();
+      deselectImage();
     });
     return badgeEl;
   }
@@ -219,6 +217,33 @@
   }
 
   function hideBadge() { if (badgeEl) badgeEl.style.display = 'none'; }
+
+  // -- Selection (click an image to pin its badge/handle open) -----------
+  function selectImage(img) {
+    if (selectedImg && selectedImg !== img) selectedImg.classList.remove('editor-selected');
+    selectedImg = img;
+    img.classList.add('editor-selected');
+    positionBadge(img);
+    positionResizeHandle(img);
+  }
+
+  function deselectImage() {
+    if (!selectedImg) return;
+    selectedImg.classList.remove('editor-selected');
+    selectedImg = null;
+    hideBadge();
+    hideResizeHandle();
+  }
+
+  // Keep the badge/handle glued to the selected image while the page scrolls
+  // or the viewport resizes, since the selection now persists indefinitely.
+  function repositionSelection() {
+    if (!selectedImg) return;
+    positionBadge(selectedImg);
+    positionResizeHandle(selectedImg);
+  }
+  window.addEventListener('scroll', repositionSelection, true);
+  window.addEventListener('resize', repositionSelection);
 
   // -- Resize handle ----------------------------------------------------
   function ensureResizeHandle() {
@@ -252,26 +277,23 @@
       dragging = false;
       target = null;
     });
-    resizeHandleEl.addEventListener('mouseenter', cancelHide);
-    resizeHandleEl.addEventListener('mouseleave', scheduleHide);
     return resizeHandleEl;
   }
 
+  // NOTE: the handle is position:fixed, so its coordinates must stay
+  // viewport-relative (no + window.scrollY/scrollX) — matching positionBadge.
   function positionResizeHandle(img) {
     const rect = api.getMockupTarget(img).getBoundingClientRect();
     const handle = ensureResizeHandle();
     handle.style.display = 'block';
-    handle.style.top = (rect.bottom - 8 + window.scrollY) + 'px';
-    handle.style.left = (rect.right - 8 + window.scrollX) + 'px';
+    handle.style.top = (rect.bottom - 8) + 'px';
+    handle.style.left = (rect.right - 8) + 'px';
     handle.currentImg = img;
   }
 
   function hideResizeHandle() { if (resizeHandleEl) resizeHandleEl.style.display = 'none'; }
 
-  function cancelHide() { clearTimeout(hideTimer); }
-  function scheduleHide() { hideTimer = setTimeout(() => { hideBadge(); hideResizeHandle(); }, 150); }
-
-  // -- Hover / click delegation ------------------------------------------
+  // -- Click delegation ---------------------------------------------------
   function markCandidates() {
     document.querySelectorAll(IMAGE_CANDIDATE_SELECTOR).forEach(el => {
       el.classList.add('editor-candidate');
@@ -283,29 +305,25 @@
     });
   }
 
-  function onMouseOver(e) {
-    if (!document.body.classList.contains('editor-mode')) return;
-    const el = e.target.closest('.editor-candidate');
-    if (!el) return;
-    cancelHide();
-    if (el.dataset.editorKind === 'image') {
-      positionBadge(el);
-      positionResizeHandle(el);
-    }
-  }
-
-  function onMouseOut(e) {
-    if (!document.body.classList.contains('editor-mode')) return;
-    const el = e.target.closest('.editor-candidate');
-    if (el) scheduleHide();
-  }
-
   function onClick(e) {
     if (!document.body.classList.contains('editor-mode')) return;
     const el = e.target.closest('.editor-candidate');
-    if (!el || el.dataset.editorKind !== 'text') return;
-    if (el.tagName === 'A' || el.closest('a')) e.preventDefault();
-    makeEditableOnClick(el);
+    if (el && el.dataset.editorKind === 'text') {
+      deselectImage();
+      if (el.tagName === 'A' || el.closest('a')) e.preventDefault();
+      makeEditableOnClick(el);
+      return;
+    }
+    if (el && el.dataset.editorKind === 'image') {
+      if (el.closest('a')) e.preventDefault(); // e.g. project-card images double as links
+      selectImage(el);
+      return;
+    }
+    // Clicking the badge/handle themselves is handled by their own listeners;
+    // anything else clicked while an image is selected deselects it.
+    if (badgeEl && badgeEl.contains(e.target)) return;
+    if (resizeHandleEl && resizeHandleEl.contains(e.target)) return;
+    deselectImage();
   }
 
   // -- Blocks (case-study pages) ------------------------------------------
@@ -474,8 +492,6 @@
     ensurePanel();
     ensureBlockControlsForExisting();
     updatePanelCount();
-    document.addEventListener('mouseover', onMouseOver);
-    document.addEventListener('mouseout', onMouseOut);
     document.addEventListener('click', onClick, true);
     document.body.classList.add('editor-mode');
     document.querySelector('.editor-toggle')?.classList.add('is-active');
@@ -486,8 +502,7 @@
     document.body.classList.remove('editor-mode');
     document.querySelector('.editor-toggle')?.classList.remove('is-active');
     if (panelEl) panelEl.style.display = 'none';
-    hideBadge();
-    hideResizeHandle();
+    deselectImage();
   }
 
   window.__editorInit = function () {
