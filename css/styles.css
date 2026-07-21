@@ -1816,13 +1816,16 @@ a { color: inherit; text-decoration: none; }
   padding: 3px;
   background: #1a1a18;
   border-radius: 100px;
-  opacity: 0;
-  pointer-events: none;
+  /* Stay clickable at all times in editor mode — a hover-gated (opacity:0,
+     pointer-events:none) version disappears the instant the mouse leaves
+     .cs-block on its way up to the pill, since the pill renders outside the
+     block's own box. Dim by default, full opacity near it, but never inert. */
+  opacity: .35;
   transition: opacity .15s;
 }
-.editor-mode .cs-block:hover .cs-block__controls {
+.editor-mode .cs-block:hover .cs-block__controls,
+.cs-block__controls:hover {
   opacity: 1;
-  pointer-events: auto;
 }
 .cs-block__controls button {
   width: 26px;
