@@ -310,12 +310,19 @@
       p.textContent = currentLangValue(p, p.getAttribute('data-en'), p.getAttribute('data-he'));
       inner.appendChild(p);
     } else if (block.type === 'mockup') {
+      const bgWrap = document.createElement('div');
+      bgWrap.className = 'cs-mockup-bg';
+      if (block.bg) {
+        bgWrap.classList.add('cs-mockup-bg--filled');
+        bgWrap.style.backgroundColor = block.bg;
+      }
       const img = document.createElement('img');
       img.alt = '';
       img.loading = 'lazy';
       img.src = block.imageSrc || PLACEHOLDER_IMG;
       img.dataset.blockField = 'image';
-      inner.appendChild(img);
+      bgWrap.appendChild(img);
+      inner.appendChild(bgWrap);
       applyMockup(img, block.device || 'phone-ios');
       // Must come after applyMockup: the mockup frame's CSS forces the raw
       // <img> to fill its screen slot, so the width belongs on the wrapper.
@@ -411,6 +418,34 @@
 
     document.dispatchEvent(new CustomEvent('content:hydrated'));
   }
+
+  // ==============================================================
+  // Loading skeleton — reveal the real page (see the shimmer rules
+  // in css/styles.css gated on html:not(.content-ready)) only once
+  // hydration has applied and every content image now in the DOM
+  // (static ones plus any case-study mockups renderBlocks just
+  // added) has actually finished loading.
+  // ==============================================================
+  function waitForImages(imgs) {
+    return Promise.all(imgs.map(img => img.complete ? Promise.resolve() : new Promise(resolve => {
+      img.addEventListener('load', resolve, { once: true });
+      img.addEventListener('error', resolve, { once: true });
+    })));
+  }
+
+  function reveal() {
+    document.documentElement.classList.add('content-ready');
+  }
+
+  document.addEventListener('content:hydrated', () => {
+    const imgs = Array.from(document.querySelectorAll(IMAGE_SELECTOR));
+    const timeout = new Promise(resolve => setTimeout(resolve, 4000));
+    Promise.race([waitForImages(imgs), timeout]).then(reveal);
+  });
+
+  // Absolute fallback: never leave the page stuck behind the skeleton,
+  // even if hydration throws before dispatching content:hydrated.
+  setTimeout(reveal, 6000);
 
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', hydrate);

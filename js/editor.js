@@ -327,6 +327,21 @@
   }
 
   // -- Blocks (case-study pages) ------------------------------------------
+  function setMockupBg(wrap, block, color) {
+    const bgEl = wrap.querySelector('.cs-mockup-bg');
+    if (!bgEl) return;
+    if (color) {
+      bgEl.classList.add('cs-mockup-bg--filled');
+      bgEl.style.backgroundColor = color;
+      block.bg = color;
+    } else {
+      bgEl.classList.remove('cs-mockup-bg--filled');
+      bgEl.style.backgroundColor = '';
+      block.bg = null;
+    }
+    schedulePersist();
+  }
+
   function addBlockControls(wrap, block) {
     if (wrap.querySelector('.cs-block__controls')) return;
     const controls = document.createElement('div');
@@ -335,9 +350,25 @@
       '<button data-action="up" title="Move up">↑</button>' +
       '<button data-action="down" title="Move down">↓</button>' +
       '<button data-action="delete" title="Delete block">✕</button>';
+    if (block.type === 'mockup') {
+      const colorInput = document.createElement('input');
+      colorInput.type = 'color';
+      colorInput.className = 'cs-block__bg-input';
+      colorInput.title = 'Background color';
+      colorInput.value = block.bg || '#f4efe6';
+      colorInput.addEventListener('input', () => setMockupBg(wrap, block, colorInput.value));
+      controls.insertBefore(colorInput, controls.firstChild);
+
+      const noneBtn = document.createElement('button');
+      noneBtn.dataset.action = 'bg-none';
+      noneBtn.title = 'No background';
+      noneBtn.textContent = '⊘';
+      controls.insertBefore(noneBtn, colorInput.nextSibling);
+    }
     controls.addEventListener('click', e => {
       const btn = e.target.closest('button');
       if (!btn) return;
+      if (btn.dataset.action === 'bg-none') { setMockupBg(wrap, block, null); return; }
       const data = getData();
       const idx = data.blocks.findIndex(b => b.id === block.id);
       if (idx === -1) return;
