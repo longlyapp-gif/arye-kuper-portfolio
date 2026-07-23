@@ -1,0 +1,8 @@
+<svg viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Master Design System placeholder visual">
+  <rect width="800" height="600" fill="#e7ebee"/>
+  <g fill="none" stroke="#1c2b3a" stroke-width="10" stroke-linejoin="round">
+    <rect x="228" y="232" width="132" height="132" rx="16"/>
+    <circle cx="482" cy="238" r="66"/>
+    <rect x="418" y="362" width="152" height="90" rx="45"/>
+  </g>
+</svg>

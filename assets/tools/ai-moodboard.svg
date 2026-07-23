@@ -1,0 +1,10 @@
+<svg viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="AI Moodboard placeholder visual">
+  <rect width="800" height="600" fill="#e4e9ff"/>
+  <g stroke="#28206e" stroke-width="10" stroke-linejoin="round" fill="none">
+    <rect x="228" y="192" width="150" height="110" rx="14"/>
+    <rect x="410" y="192" width="150" height="110" rx="14"/>
+    <rect x="228" y="332" width="150" height="110" rx="14"/>
+    <rect x="410" y="332" width="150" height="110" rx="14"/>
+  </g>
+  <path d="M548 156 L566 202 L612 220 L566 238 L548 284 L530 238 L484 220 L530 202 Z" fill="#28206e"/>
+</svg>

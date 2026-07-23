@@ -1,0 +1,15 @@
+<svg viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Smart Task Manager placeholder visual">
+  <rect width="800" height="600" fill="#fde8d2"/>
+  <g stroke="#7a3b12" stroke-width="12" stroke-linecap="round" stroke-linejoin="round" fill="none">
+    <rect x="220" y="188" width="48" height="48" rx="10"/>
+    <path d="M232 212 l8 9 l17 -21"/>
+    <line x1="302" y1="212" x2="560" y2="212"/>
+
+    <rect x="220" y="276" width="48" height="48" rx="10"/>
+    <path d="M232 300 l8 9 l17 -21"/>
+    <line x1="302" y1="300" x2="520" y2="300"/>
+
+    <rect x="220" y="364" width="48" height="48" rx="10"/>
+    <line x1="302" y1="388" x2="540" y2="388"/>
+  </g>
+</svg>
